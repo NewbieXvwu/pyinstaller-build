@@ -41,7 +41,7 @@ inputs:
 runs:
   using: "composite"
   steps: 
-    - name: setup python 3.9.7
+    - name: setup python 3.10.1
       uses: actions/setup-python@v2
       with:
         python-version: ${{ inputs.python_version }}
@@ -53,5 +53,8 @@ runs:
         ${{ inputs.no-console }} && NO_CONSOLE=--noconsole
         [ ${{ inputs.icon }} != "NONE" ] && ICON=--icon=${{ inputs.icon }}.ico
         pip install pyinstaller==${{ inputs.pyinstaller_version }}
+        sudo apt-get install python3-tk
+        pip install requests
+        pip install ttkthemes
         pyinstaller --clean -y -p C:\hostedtoolcache\windows\python\3.10.1\x64\lib\site-packages --hidden-import=ttkthemes --hidden-import=requests --dist ${{ inputs.dist }} $NO_CONSOLE $ICON --name ${{ inputs.artifact }} --onefile ${{ inputs.main }}.py
         chown -R --reference=. ${{ inputs.dist }}
