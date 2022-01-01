@@ -53,5 +53,5 @@ runs:
         ${{ inputs.no-console }} && NO_CONSOLE=--noconsole
         [ ${{ inputs.icon }} != "NONE" ] && ICON=--icon=${{ inputs.icon }}.ico
         pip install pyinstaller==${{ inputs.pyinstaller_version }}
-        pyinstaller --clean -y --dist ${{ inputs.dist }} $NO_CONSOLE $ICON --name ${{ inputs.artifact }} --onefile ${{ inputs.main }}.py
+        pyinstaller --clean -y -p c:\hostedtoolcache\windows\python\3.10.1\x64\lib\site-packages --dist ${{ inputs.dist }} $NO_CONSOLE $ICON --name ${{ inputs.artifact }} --onefile ${{ inputs.main }}.py
         chown -R --reference=. ${{ inputs.dist }}
