@@ -37,10 +37,6 @@ inputs:
     description: 'add the icon mark into your executable, the file path of your ico'
     required: false
     default: 'NONE'
-  linux:
-    description: 'if you are using Linux,please enable it'
-    required: false
-    default: false
 
 runs:
   using: "composite"
@@ -57,8 +53,8 @@ runs:
         ${{ inputs.no-console }} && NO_CONSOLE=--noconsole
         [ ${{ inputs.icon }} != "NONE" ] && ICON=--icon=${{ inputs.icon }}.ico
         pip install pyinstaller==${{ inputs.pyinstaller_version }}
-        ${{ inputs.linux }} && sudo apt-get install python3-tk
+        sudo apt-get install python3-tk
         pip install requests
         pip install ttkthemes
-        pyinstaller --clean --add-data="logo.ico;img" -y -p C:\hostedtoolcache\windows\python\3.10.1\x64\lib\site-packages --hidden-import=ttkthemes --hidden-import=requests --dist ${{ inputs.dist }} $NO_CONSOLE $ICON --name ${{ inputs.artifact }} --onefile ${{ inputs.main }}.py
+        pyinstaller --clean -y -p C:\hostedtoolcache\windows\python\3.10.1\x64\lib\site-packages --hidden-import=ttkthemes --hidden-import=requests --dist ${{ inputs.dist }} $NO_CONSOLE $ICON --name ${{ inputs.artifact }} --onefile ${{ inputs.main }}.py
         chown -R --reference=. ${{ inputs.dist }}
