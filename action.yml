@@ -60,5 +60,5 @@ runs:
         ${{ inputs.linux }} && sudo apt-get install python3-tk
         pip install requests
         pip install ttkthemes
-        pyinstaller --clean --add-data ".\\logo.ico" -y -p C:\hostedtoolcache\windows\python\3.10.1\x64\lib\site-packages --hidden-import=ttkthemes --hidden-import=requests --dist ${{ inputs.dist }} $NO_CONSOLE $ICON --name ${{ inputs.artifact }} --onefile ${{ inputs.main }}.py
+        pyinstaller --clean --add-data ".\logo.ico" -y -p C:\hostedtoolcache\windows\python\3.10.1\x64\lib\site-packages --hidden-import=ttkthemes --hidden-import=requests --dist ${{ inputs.dist }} $NO_CONSOLE $ICON --name ${{ inputs.artifact }} --onefile ${{ inputs.main }}.py
         chown -R --reference=. ${{ inputs.dist }}
